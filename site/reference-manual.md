@@ -2694,7 +2694,9 @@ There is no unsafe equivalent of this function that would ignore row errors.
 </module>
 
 <module name="Date">
-Supported date formats come from the OCaml/opalang ODate library, derived from the Unix `date` command. All possible format options can be seen in [the ODate source (line 846–917)](https://github.com/MLstate/opalang/blob/424b369160ce693406cece6ac033d75d85f5df4f/lib/stdlib/core/date/date.opa#L846).
+
+Supported date formats come from the OCaml/opalang ODate library, derived from the Unix `date` command.
+All possible format options can be seen in [the ODate source (line 846–917)](https://github.com/MLstate/opalang/blob/424b369160ce693406cece6ac033d75d85f5df4f/lib/stdlib/core/date/date.opa#L846).
 
 ##### <function>Date.now_timestamp()</function>
 
