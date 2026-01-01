@@ -52,6 +52,18 @@ Soupault is available in [nixpkgs](https://search.nixos.org/packages?channel=uns
 
 Nix packaging is maintained by [toastal](https://toast.al/).
 
+### Gentoo
+
+Soupault is available in the Gentoo [GURU overlay](https://gitweb.gentoo.org/repo/proj/guru.git) both as a source package ([www-apps/soupault](https://gitweb.gentoo.org/repo/proj/guru.git/tree/www-apps/soupault)) and binary package ([www-apps/soupault-bin](https://gitweb.gentoo.org/repo/proj/guru.git/tree/www-apps/soupault-bin) - amd64 and arm64 only).
+
+```
+eselect repository enable guru
+emerge --sync
+emerge www-apps/soupault  # or www-apps/soupault-bin
+```
+
+Packages in GURU are never stabilized, so expect to accept some keywords. The packages are maintained by [laumann](https://laumann.xyz) and [Itai Ferber](https://itaiferber.net).
+
 ## Building from source
 
 Soupault is free software published under the [MIT license](https://mit-license.org/). You can build it from source for any
