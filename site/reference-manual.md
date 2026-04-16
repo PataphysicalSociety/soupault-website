@@ -1776,8 +1776,6 @@ Plugins have access to the following global variables:
   <dd>The global soupault config (deserialized contents of <code>soupault.toml</code>).</dd>
   <dt>site_index</dt>
   <dd>Site index data structure.</dd>
-  <dt>index_entry</dt>
-  <dd>The index entry of the current page.</dd>
   <dt>site_dir, build_dir</dt>
   <dd>Convenience variables for the corresponding config options.</dd>
 </dl>
