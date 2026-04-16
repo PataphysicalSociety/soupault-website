@@ -376,7 +376,7 @@ The `page_file_extensions` option defines which files are treated as pages. This
 
 By default, pages are assumed to be HTML files that can be parsed directly into element trees.
 However, you can also store pages in different formats and tell soupault how to convert them to HTML
-before parding.
+before parsing.
 
 ### Built-in Markdown support
 
