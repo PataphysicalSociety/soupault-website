@@ -1,7 +1,7 @@
 [settings]
   strict = true
-  verbose = true
-  debug = true
+  #verbose = true
+  #debug = true
 
   default_template_file = "templates/main.html"
   default_content_selector = "main"
@@ -13,6 +13,8 @@
   page_file_extensions = ["htm", "html", "md"]
 
   markdown_extensions = ["md"]
+  markdown_smart_punctuation = true
+  markdown_smart_apostrophe = true
 
   ignore_extensions = ["draft"]
 
@@ -24,9 +26,9 @@
   soupault_version = "5.0.0"
 
 [custom_options]
-  site_url = "https://soupault.app"
+  site_url = "https://soupault.net"
 
-  latest_soupault_version = "5.1.0"
+  latest_soupault_version = "5.3.0"
 
 [index]
   index = true
@@ -101,6 +103,7 @@ page_source = Regex.replace_all(page_source, "\\$SOUPAULT_RELEASE", soupault_rel
 
 [widgets.insert-generator-meta]
   widget = "generator-meta"
+  disabled = true
 
 [widgets.page-title]
   widget = "title"
