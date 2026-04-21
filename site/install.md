@@ -8,10 +8,12 @@ The simplest way to start using soupault is to download a prebuilt executable. J
       not only GNU/Linux.</span></dt>
   <dd><soupault-release platform="linux-x86_64" />
   <dt>Linux (AArch64/ARM64)</dt>
-  <dd><soupault-release platform="linux-aarch64" />
+  <dd><soupault-release platform="linux-arm64" />
   <dt>Microsoft Windows (64-bit)</dt>
   <dd><soupault-release platform="win64" /></dd>
-  <dt>macOS</dt>
+  <dt>macOS (Apple silicon/ARM64)</dt>
+  <dd><soupault-release platform="macos-arm64" /></dd>
+  <dt>macOS (Intel)</dt>
   <dd><soupault-release platform="macos-x86_64" /></dd>
 </dl>
 
