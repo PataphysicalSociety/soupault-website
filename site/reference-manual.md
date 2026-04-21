@@ -47,7 +47,7 @@ executables linked with GNU libc may try to dynamically load shared libraries).
 OCaml uses GNU libc on Linux by default,
 so to replicate official releases, you need to create an opam switch with musl and static linking enabled.
 
-Suppose you want to build soupault with OCaml 5.2.0 (the latest as of October 2024). You will need the following commands:
+Suppose you want to build soupault with OCaml 5.4.0 (the latest as of April 2026). You will need the following commands:
 
 ```
 # Install dependencies, for Fedora (or recent RHEL/CentOS Stream):
@@ -57,8 +57,8 @@ sudo dnf install musl-gcc musl-libc-static
 sudo apt install musl musl-dev musl-tools
 
 # Create an OCaml installation that uses musl-based runtime
-opam switch create 5.2.0-musl ocaml-variants.5.2.0+options ocaml-option-musl ocaml-option-static
-opam switch 5.2.0-musl
+opam switch create 5.4.0-musl ocaml-variants.5.4.0+options ocaml-option-musl ocaml-option-static
+opam switch 5.4.0-musl
 ```
 
 Then use the `static` dune profile for your build command:
@@ -398,6 +398,41 @@ the built-in implementation or an external [page preprocessor](#page-preprocesso
 Extensions from that list are implicitly added to `settings.page_file_extensions`,
 so you do not have to add them to that list by hand.
 
+Since 5.3.0, soupault also offers multiple options to control Markdown rendering:
+
+```toml
+[settings]
+    # Set to `true` to enable "smart punctuation"
+    markdown_smart_punctuation = false
+
+    # You can disable individual punctuation substitutions
+    # if you only want some of them but not all
+
+    # Replace `` and '' with &ldquo; and &rdquo;
+    markdown_smart_quotes = true
+
+    # Replace ' with &rsquo;
+    markdown_smart_apostrophe = true
+
+    # Replace --- and -- with &mdash; and &ndash;
+    markdown_smart_dashes = true
+
+    # Replace "..." with &hellip;
+    markdown_smart_ellipsis = true
+
+    # Set to true to render math delimiters
+    # as `<span class="math-inline">`, `<span class="math-display">`
+    # and `<div class="math-display">`
+    # rather than `\[ \]` and `\( \)`
+    # to facilitate static rendering with widgets
+    markdown_math_delimiters_html = false
+
+    # Set to true if you want to disable Markdown extensions
+    # such as strike-through or tables
+    # and keep the syntax to strict CommonMark
+    markdown_strict_commonmark = false
+```
+
 It is also possible to import pages in any format using page preprocessors.
 
 ### Page preprocessors
@@ -482,6 +517,14 @@ Just add `clean_urls = false` to the `[settings]` section of your `soupault.conf
 ```toml
 [settings]
   clean_urls = false
+```
+
+Since soupault 5.3.0, it's also possible to exclude only some pages from clean URLs.
+For example, exclude pages like `404.html`:
+
+```toml
+[settings]
+  clean_urls_exclude_regexes = ['\d+\.html']
 ```
 
 ### Soupault as an HTML processor
@@ -683,6 +726,16 @@ This is the equivalent of `index_item_template`:
     {% endfor %}
   """
 ```
+
+The following variables related to the _current page_
+(i.e., the page where the index is being rendered)
+are available in the environment:
+
+* `page_file` (string) — the source file of the page.
+* `target_dir` (string) — the target directory for the page file.
+* `target_file` (string) — the full target page output file path.
+* `url` (string) — the generated page URL.
+* `nav_path` (string list) — the [navigation path](#glossary-navigation-path).
 
 #### External index processor
 
@@ -1633,6 +1686,8 @@ A prefix can be simply a directory, a URI schema or a host address is not requir
 
 This widget supports all options of the [`relative_links`](#relative_links) widget.
 
+If `settings.site_dir` is defined, then this widget will use it when the `prefix` option is not provided.
+
 ## Plugins
 
 Since version 1.2, soupault can be extended with Lua plugins.
@@ -2280,6 +2335,12 @@ env["addressee"] = "world"
 s = String.render_template("{{greeting}} {{addressee}}", env)
 ```
 
+##### <function>String.render_markdown(str)</function>
+
+Renders a Markdown string to HTML.
+
+This function respects the smart punctuation options from `[settings]`.
+
 ##### <function>String.base64_encode(string)</function>
 
 Encodes a string in Base64.
@@ -2713,6 +2774,10 @@ Converts a datetime string to a UNIX timestamp, using a list of allowed datetime
 Returns `nil` if none of the formats match the datetime string.
 
 Example: `Date.to_timestamp("2006-08-16", {"%Y-%m-%d"})`
+
+##### <function>Date.format_timestamp(num, format)</function>
+
+Converts a UNIX timestamp into a human-readable format.
 
 ##### <function>Date.reformat(date_string, input_formats, output_format)</function>
 
