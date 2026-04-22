@@ -19,7 +19,7 @@ Soupault now offers official prebuilt binaries for macOS on ARM64.
 ### Smart punctuation for Markdown
 
 I realized that the built-in Markdown renderer that soupault uses (Cmarkit) doesn't support ``smart punctuation''
-(sometimes called ``smartypants'' after a [popular early implementation](https://erratique.ch/software/cmarkit/doc/Cmarkit_renderer/index.html#example)).
+(sometimes called smartypants after a [popular early implementation](https://erratique.ch/software/cmarkit/doc/Cmarkit_renderer/index.html#example)).
 The reason I didn't notice is that I'm used to just writing HTML entities like `&ldquo;` or entering Unicode characters directly,
 but it's still a missing feature that many SSGs offer, so I went on to add it.
 
